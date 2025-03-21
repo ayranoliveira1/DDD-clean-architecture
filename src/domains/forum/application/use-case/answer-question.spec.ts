@@ -1,21 +1,24 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { AnsWerQuestionUseCase } from './answer-question'
-import { Answer } from '../../enterprise/entities/answer'
+import { AnswerQuestionUseCase } from './answer-question'
+import { InMemoryAnswerRepository } from 'tests/repositories/in-memory-answer-repository'
 
-const fakerAnswerRepository = {
-  create: async (answer: Answer) => {
-    return
-  },
-}
+let inMemoryAnswerRepository = new InMemoryAnswerRepository()
+let sut = new AnswerQuestionUseCase(inMemoryAnswerRepository)
 
-test('create an answer to a question', async () => {
-  const answerTest = new AnsWerQuestionUseCase(fakerAnswerRepository)
-
-  const answer = await answerTest.excute({
-    questionId: '1',
-    instructorId: '1',
-    content: 'new answer',
+describe('Answer Question', () => {
+  beforeAll(() => {
+    inMemoryAnswerRepository = new InMemoryAnswerRepository()
+    sut = new AnswerQuestionUseCase(inMemoryAnswerRepository)
   })
 
-  expect(answer.content).toEqual('new answer')
+  it('create an answer to a question', async () => {
+    const { answer } = await sut.excute({
+      questionId: '1',
+      instructorId: '2',
+      content: 'new answer',
+    })
+
+    expect(answer.id).toBeTruthy()
+    expect(inMemoryAnswerRepository.items[0].id).toEqual(answer.id)
+    expect(answer.content).toEqual('new answer')
+  })
 })
