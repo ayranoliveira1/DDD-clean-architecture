@@ -38,8 +38,6 @@ describe('Fetch Recents questions', () => {
 
     const { questions } = await sut.execute({ page: 2 })
 
-    console.log(questions.length)
-
     expect(questions).toHaveLength(2)
   })
 })
