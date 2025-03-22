@@ -5,7 +5,7 @@ let inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
 let sut = new CreateQuestionUseCase(inMemoryQuestionsRepository)
 
 describe('Create Questions', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
     sut = new CreateQuestionUseCase(inMemoryQuestionsRepository)
   })

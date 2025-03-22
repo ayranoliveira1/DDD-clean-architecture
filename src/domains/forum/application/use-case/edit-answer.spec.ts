@@ -6,7 +6,7 @@ let inMemoryAnswerRepository = new InMemoryAnswerRepository()
 let sut = new EditAnswerUseCase(inMemoryAnswerRepository)
 
 describe('Edit Answer By Id', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     inMemoryAnswerRepository = new InMemoryAnswerRepository()
     sut = new EditAnswerUseCase(inMemoryAnswerRepository)
   })

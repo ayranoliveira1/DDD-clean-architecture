@@ -12,7 +12,7 @@ let sut = new ChooseQuestionBestAnswerUseCase(
 )
 
 describe('Choose best Answer', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     inMemoryAnswerRepository = new InMemoryAnswerRepository()
     inMemoryQuestionRepository = new InMemoryQuestionsRepository()
     sut = new ChooseQuestionBestAnswerUseCase(

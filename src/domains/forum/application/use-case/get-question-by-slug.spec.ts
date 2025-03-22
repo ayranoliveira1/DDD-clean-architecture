@@ -6,7 +6,7 @@ let inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
 let sut = new GetQuestionBySlugUseCase(inMemoryQuestionsRepository)
 
 describe('Get Questions By slug', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
     sut = new GetQuestionBySlugUseCase(inMemoryQuestionsRepository)
   })

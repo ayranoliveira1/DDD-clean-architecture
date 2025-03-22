@@ -6,7 +6,7 @@ let inMemoryAnswerRepository = new InMemoryAnswerRepository()
 let sut = new DeleteAnswerUseCase(inMemoryAnswerRepository)
 
 describe('Delete Answer', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     inMemoryAnswerRepository = new InMemoryAnswerRepository()
     sut = new DeleteAnswerUseCase(inMemoryAnswerRepository)
   })
