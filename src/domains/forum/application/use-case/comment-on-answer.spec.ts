@@ -1,0 +1,52 @@
+import { makeAnswer } from 'tests/factories/make-answer'
+import { CommentOnAnswerUseCase } from './comment-on-answer'
+import { InMemoryAnswerRepository } from 'tests/repositories/in-memory-answer-repository'
+import { InMemoryAnswerCommentsRespository } from 'tests/repositories/in-memory-answer-comments-repository'
+
+let inMemoryAnswerCommentRepository = new InMemoryAnswerCommentsRespository()
+let inMemoryAnswerRepository = new InMemoryAnswerRepository()
+let sut = new CommentOnAnswerUseCase(
+  inMemoryAnswerRepository,
+  inMemoryAnswerCommentRepository,
+)
+
+describe('Comment on answer', () => {
+  beforeEach(() => {
+    inMemoryAnswerRepository = new InMemoryAnswerRepository()
+    inMemoryAnswerCommentRepository = new InMemoryAnswerCommentsRespository()
+    sut = new CommentOnAnswerUseCase(
+      inMemoryAnswerRepository,
+      inMemoryAnswerCommentRepository,
+    )
+  })
+
+  it('should be able to comment on answer ', async () => {
+    const answer = makeAnswer()
+
+    await inMemoryAnswerRepository.create(answer)
+
+    await sut.execute({
+      answerId: answer.id.toString(),
+      authorId: answer.authorId.toString(),
+      content: 'Comentario teste',
+    })
+
+    expect(inMemoryAnswerCommentRepository.items[0].content).toEqual(
+      'Comentario teste',
+    )
+  })
+
+  it('should not be able to comment on teste ', async () => {
+    const answer = makeAnswer()
+
+    await inMemoryAnswerRepository.create(answer)
+
+    await expect(async () => {
+      await sut.execute({
+        answerId: 'invalid-id',
+        authorId: answer.authorId.toString(),
+        content: 'Comentario teste',
+      })
+    }).rejects.toBeInstanceOf(Error)
+  })
+})
