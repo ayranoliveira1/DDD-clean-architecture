@@ -1,13 +1,13 @@
 import { makeAnswerComment } from 'tests/factories/make-answer-comment'
 import { DeleteAnswerCommentUseCase } from './delete-answer-comment'
-import { InMemoryAnswerCommentsRepository } from 'tests/repositories/in-memory-answer-comments-repository'
+import { InMemoryAnswerCommentRepository } from 'tests/repositories/in-memory-answer-comments-repository'
 
-let inMemoryAnswerCommentRepository = new InMemoryAnswerCommentsRepository()
+let inMemoryAnswerCommentRepository = new InMemoryAnswerCommentRepository()
 let sut = new DeleteAnswerCommentUseCase(inMemoryAnswerCommentRepository)
 
 describe('Delete question comment', () => {
   beforeEach(() => {
-    inMemoryAnswerCommentRepository = new InMemoryAnswerCommentsRepository()
+    inMemoryAnswerCommentRepository = new InMemoryAnswerCommentRepository()
     sut = new DeleteAnswerCommentUseCase(inMemoryAnswerCommentRepository)
   })
 
