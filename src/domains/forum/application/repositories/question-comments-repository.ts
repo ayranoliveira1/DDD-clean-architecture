@@ -1,7 +1,7 @@
 import { PaginationParms } from '@/core/repositories/pagination-params'
 import { QuestionComment } from '../../enterprise/entities/question-comments'
 
-export interface QuestionCommentsRepositoty {
+export interface QuestionCommentsRepository {
   findById(id: string): Promise<QuestionComment | null>
   findManyByQuestionId(
     questionId: string,

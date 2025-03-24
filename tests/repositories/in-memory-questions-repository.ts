@@ -1,5 +1,5 @@
 import { PaginationParms } from '@/core/repositories/pagination-params'
-import { QuestionAttchmentsRepositoty } from '@/domains/forum/application/repositories/question-attachment-repository'
+import { QuestionAttchmentsRepository } from '@/domains/forum/application/repositories/question-attachment-repository'
 import { QuestionsRepository } from '@/domains/forum/application/repositories/questions-repository'
 import { Question } from '@/domains/forum/enterprise/entities/question'
 
@@ -7,7 +7,7 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
   public items: Question[] = []
 
   constructor(
-    private questionAttachmentRepository: QuestionAttchmentsRepositoty,
+    private questionAttachmentRepository: QuestionAttchmentsRepository,
   ) {}
 
   async findById(id: string) {
