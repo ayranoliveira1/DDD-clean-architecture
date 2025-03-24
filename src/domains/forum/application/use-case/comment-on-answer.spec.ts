@@ -3,9 +3,15 @@ import { CommentOnAnswerUseCase } from './comment-on-answer'
 import { InMemoryAnswerRepository } from 'tests/repositories/in-memory-answer-repository'
 import { InMemoryAnswerCommentRepository } from 'tests/repositories/in-memory-answer-comments-repository'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { InMemoryAnswerAttchmentsRepository } from 'tests/repositories/in-memory-anser-attachment-repostory'
+
+let inMemoryAnswerAttchmentsRepository =
+  new InMemoryAnswerAttchmentsRepository()
 
 let inMemoryAnswerCommentRepository = new InMemoryAnswerCommentRepository()
-let inMemoryAnswerRepository = new InMemoryAnswerRepository()
+let inMemoryAnswerRepository = new InMemoryAnswerRepository(
+  inMemoryAnswerAttchmentsRepository,
+)
 let sut = new CommentOnAnswerUseCase(
   inMemoryAnswerRepository,
   inMemoryAnswerCommentRepository,
@@ -13,7 +19,12 @@ let sut = new CommentOnAnswerUseCase(
 
 describe('Comment on answer', () => {
   beforeEach(() => {
-    inMemoryAnswerRepository = new InMemoryAnswerRepository()
+    inMemoryAnswerAttchmentsRepository =
+      new InMemoryAnswerAttchmentsRepository()
+
+    inMemoryAnswerRepository = new InMemoryAnswerRepository(
+      inMemoryAnswerAttchmentsRepository,
+    )
     inMemoryAnswerCommentRepository = new InMemoryAnswerCommentRepository()
     sut = new CommentOnAnswerUseCase(
       inMemoryAnswerRepository,

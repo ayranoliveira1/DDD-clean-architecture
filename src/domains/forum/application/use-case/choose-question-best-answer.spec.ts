@@ -5,14 +5,20 @@ import { InMemoryQuestionsRepository } from 'tests/repositories/in-memory-questi
 import { makeQuestions } from 'tests/factories/make-questions'
 import { NotAllowedError } from './errors/not-allowed-error'
 import { InMemoryQuestionAttchmentsRepository } from 'tests/repositories/in-memory-question-attachment-repository'
+import { InMemoryAnswerAttchmentsRepository } from 'tests/repositories/in-memory-anser-attachment-repostory'
 
 let inMemoryQuestionAttachmentRepository =
   new InMemoryQuestionAttchmentsRepository()
 
+let inMemoryAnswerAttchmentsRepository =
+  new InMemoryAnswerAttchmentsRepository()
+
 let inMemoryQuestionRepository = new InMemoryQuestionsRepository(
   inMemoryQuestionAttachmentRepository,
 )
-let inMemoryAnswerRepository = new InMemoryAnswerRepository()
+let inMemoryAnswerRepository = new InMemoryAnswerRepository(
+  inMemoryAnswerAttchmentsRepository,
+)
 let sut = new ChooseQuestionBestAnswerUseCase(
   inMemoryQuestionRepository,
   inMemoryAnswerRepository,
@@ -23,7 +29,12 @@ describe('Choose best Answer', () => {
     inMemoryQuestionAttachmentRepository =
       new InMemoryQuestionAttchmentsRepository()
 
-    inMemoryAnswerRepository = new InMemoryAnswerRepository()
+    inMemoryAnswerAttchmentsRepository =
+      new InMemoryAnswerAttchmentsRepository()
+
+    inMemoryAnswerRepository = new InMemoryAnswerRepository(
+      inMemoryAnswerAttchmentsRepository,
+    )
     inMemoryQuestionRepository = new InMemoryQuestionsRepository(
       inMemoryQuestionAttachmentRepository,
     )
