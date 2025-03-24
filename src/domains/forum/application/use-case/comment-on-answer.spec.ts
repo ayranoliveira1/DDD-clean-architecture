@@ -2,6 +2,7 @@ import { makeAnswer } from 'tests/factories/make-answer'
 import { CommentOnAnswerUseCase } from './comment-on-answer'
 import { InMemoryAnswerRepository } from 'tests/repositories/in-memory-answer-repository'
 import { InMemoryAnswerCommentRepository } from 'tests/repositories/in-memory-answer-comments-repository'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 let inMemoryAnswerCommentRepository = new InMemoryAnswerCommentRepository()
 let inMemoryAnswerRepository = new InMemoryAnswerRepository()
@@ -41,12 +42,13 @@ describe('Comment on answer', () => {
 
     await inMemoryAnswerRepository.create(answer)
 
-    await expect(async () => {
-      await sut.execute({
-        answerId: 'invalid-id',
-        authorId: answer.authorId.toString(),
-        content: 'Comentario teste',
-      })
-    }).rejects.toBeInstanceOf(Error)
+    const result = await sut.execute({
+      answerId: 'invalid-id',
+      authorId: answer.authorId.toString(),
+      content: 'Comentario teste',
+    })
+
+    expect(result.isLeft()).toBe(true)
+    expect(result.value).toBeInstanceOf(ResourceNotFoundError)
   })
 })
