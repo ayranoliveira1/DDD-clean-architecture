@@ -2,13 +2,24 @@ import { InMemoryQuestionsRepository } from 'tests/repositories/in-memory-questi
 import { makeQuestions } from 'tests/factories/make-questions'
 import { DeleteQuestionUseCase } from './delete-question'
 import { NotAllowedError } from './errors/not-allowed-error'
+import { InMemoryQuestionAttchmentsRepository } from 'tests/repositories/in-memory-question-attachment-repository'
+import { UniqueEntityId } from '@/core/entities/unique-entity-id'
+import { makeQuestionAttchment } from 'tests/factories/make-question-attachements'
 
-let inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
+let inMemoryQuestionAttachmentRepository =
+  new InMemoryQuestionAttchmentsRepository()
+let inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
+  inMemoryQuestionAttachmentRepository,
+)
 let sut = new DeleteQuestionUseCase(inMemoryQuestionsRepository)
 
 describe('Delete Questions By Id', () => {
   beforeEach(() => {
-    inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
+    inMemoryQuestionAttachmentRepository =
+      new InMemoryQuestionAttchmentsRepository()
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
+      inMemoryQuestionAttachmentRepository,
+    )
     sut = new DeleteQuestionUseCase(inMemoryQuestionsRepository)
   })
 
@@ -16,6 +27,19 @@ describe('Delete Questions By Id', () => {
     const newQuestion = makeQuestions()
 
     await inMemoryQuestionsRepository.create(newQuestion)
+
+    inMemoryQuestionAttachmentRepository.items.push(
+      makeQuestionAttchment({
+        questionId: newQuestion.id,
+        attachmentId: new UniqueEntityId('1'),
+      }),
+    )
+    inMemoryQuestionAttachmentRepository.items.push(
+      makeQuestionAttchment({
+        questionId: newQuestion.id,
+        attachmentId: new UniqueEntityId('2'),
+      }),
+    )
 
     await sut.execute({
       questionId: newQuestion.id.toString(),

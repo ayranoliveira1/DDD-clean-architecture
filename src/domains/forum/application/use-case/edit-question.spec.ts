@@ -6,10 +6,12 @@ import { InMemoryQuestionAttchmentsRepository } from 'tests/repositories/in-memo
 import { makeQuestionAttchment } from 'tests/factories/make-question-attachements'
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 
-let inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
 let inMemoryQuestionAttchmentsRepository =
   new InMemoryQuestionAttchmentsRepository()
 
+let inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
+  inMemoryQuestionAttchmentsRepository,
+)
 let sut = new EditQuestionUseCase(
   inMemoryQuestionsRepository,
   inMemoryQuestionAttchmentsRepository,
@@ -17,7 +19,9 @@ let sut = new EditQuestionUseCase(
 
 describe('Edit Questions By Id', () => {
   beforeEach(() => {
-    inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
+      inMemoryQuestionAttchmentsRepository,
+    )
     inMemoryQuestionAttchmentsRepository =
       new InMemoryQuestionAttchmentsRepository()
 

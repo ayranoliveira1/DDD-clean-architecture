@@ -3,9 +3,14 @@ import { InMemoryQuestionCommentRepository } from 'tests/repositories/in-memory-
 import { CommentOnQuestionUseCase } from './comment-on-question'
 import { InMemoryQuestionsRepository } from 'tests/repositories/in-memory-questions-repository'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { InMemoryQuestionAttchmentsRepository } from 'tests/repositories/in-memory-question-attachment-repository'
 
+let inMemoryQuestionAttachmentRepository =
+  new InMemoryQuestionAttchmentsRepository()
 let inMemoryQuestionCommentRepository = new InMemoryQuestionCommentRepository()
-let inMemoryQuestionRepository = new InMemoryQuestionsRepository()
+let inMemoryQuestionRepository = new InMemoryQuestionsRepository(
+  inMemoryQuestionAttachmentRepository,
+)
 let sut = new CommentOnQuestionUseCase(
   inMemoryQuestionRepository,
   inMemoryQuestionCommentRepository,
@@ -13,7 +18,13 @@ let sut = new CommentOnQuestionUseCase(
 
 describe('Comment on question', () => {
   beforeEach(() => {
-    inMemoryQuestionRepository = new InMemoryQuestionsRepository()
+    inMemoryQuestionAttachmentRepository =
+      new InMemoryQuestionAttchmentsRepository()
+
+    inMemoryQuestionRepository = new InMemoryQuestionsRepository(
+      inMemoryQuestionAttachmentRepository,
+    )
+
     inMemoryQuestionCommentRepository = new InMemoryQuestionCommentRepository()
     sut = new CommentOnQuestionUseCase(
       inMemoryQuestionRepository,
