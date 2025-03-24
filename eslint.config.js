@@ -13,14 +13,19 @@ export default [
       prettier: prettier,
       vitest: vitest,
     },
-
-    rules: {
-      quotes: ['error', 'single'], // Usar aspas simples
-      semi: ['error', 'never'],
-      'no-unused-vars': 'off',
-    },
   },
   { languageOptions: { globals: globals.node } },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
+
+  {
+    rules: {
+      quotes: ['error', 'single'], // Usar aspas simples
+      semi: ['error', 'never'],
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-empty-object-type': 'off',
+      // '@typescript-eslint/no-empty-interface': 'off',
+      // '@typescript-eslint/ban-types': 'off',
+    },
+  },
 ]
