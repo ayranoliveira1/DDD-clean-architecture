@@ -1,7 +1,7 @@
 import { InMemoryQuestionsRepository } from 'tests/repositories/in-memory-questions-repository'
 import { makeQuestions } from 'tests/factories/make-questions'
 import { DeleteQuestionUseCase } from './delete-question'
-import { NotAllowedError } from './errors/not-allowed-error'
+import { NotAllowedError } from '@/core/@types/errors/errors/not-allowed-error'
 import { InMemoryQuestionAttchmentsRepository } from 'tests/repositories/in-memory-question-attachment-repository'
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 import { makeQuestionAttchment } from 'tests/factories/make-question-attachements'

@@ -2,7 +2,7 @@ import { makeQuestions } from 'tests/factories/make-questions'
 import { InMemoryQuestionCommentRepository } from 'tests/repositories/in-memory-question-comments'
 import { CommentOnQuestionUseCase } from './comment-on-question'
 import { InMemoryQuestionsRepository } from 'tests/repositories/in-memory-questions-repository'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { ResourceNotFoundError } from '@/core/@types/errors/errors/resource-not-found-error'
 import { InMemoryQuestionAttchmentsRepository } from 'tests/repositories/in-memory-question-attachment-repository'
 
 let inMemoryQuestionAttachmentRepository =

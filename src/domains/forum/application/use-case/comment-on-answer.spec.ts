@@ -2,7 +2,7 @@ import { makeAnswer } from 'tests/factories/make-answer'
 import { CommentOnAnswerUseCase } from './comment-on-answer'
 import { InMemoryAnswerRepository } from 'tests/repositories/in-memory-answer-repository'
 import { InMemoryAnswerCommentRepository } from 'tests/repositories/in-memory-answer-comments-repository'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { ResourceNotFoundError } from '@/core/@types/errors/errors/resource-not-found-error'
 import { InMemoryAnswerAttchmentsRepository } from 'tests/repositories/in-memory-anser-attachment-repostory'
 
 let inMemoryAnswerAttchmentsRepository =

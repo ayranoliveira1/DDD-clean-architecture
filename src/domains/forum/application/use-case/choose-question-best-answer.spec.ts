@@ -3,7 +3,7 @@ import { makeAnswer } from 'tests/factories/make-answer'
 import { ChooseQuestionBestAnswerUseCase } from './choose-question-best-answer'
 import { InMemoryQuestionsRepository } from 'tests/repositories/in-memory-questions-repository'
 import { makeQuestions } from 'tests/factories/make-questions'
-import { NotAllowedError } from './errors/not-allowed-error'
+import { NotAllowedError } from '@/core/@types/errors/errors/not-allowed-error'
 import { InMemoryQuestionAttchmentsRepository } from 'tests/repositories/in-memory-question-attachment-repository'
 import { InMemoryAnswerAttchmentsRepository } from 'tests/repositories/in-memory-anser-attachment-repostory'
 

@@ -1,7 +1,7 @@
 import { makeAnswerComment } from 'tests/factories/make-answer-comment'
 import { DeleteAnswerCommentUseCase } from './delete-answer-comment'
 import { InMemoryAnswerCommentRepository } from 'tests/repositories/in-memory-answer-comments-repository'
-import { NotAllowedError } from './errors/not-allowed-error'
+import { NotAllowedError } from '@/core/@types/errors/errors/not-allowed-error'
 
 let inMemoryAnswerCommentRepository = new InMemoryAnswerCommentRepository()
 let sut = new DeleteAnswerCommentUseCase(inMemoryAnswerCommentRepository)
