@@ -1,5 +1,4 @@
 import { DomainEvent } from '@/core/events/domain-event'
-import { Answer } from '../entities/answer'
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 import { Question } from '../entities/question'
 
