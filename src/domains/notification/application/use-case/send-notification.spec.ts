@@ -4,7 +4,7 @@ import { InMemoryNotificationRepository } from 'tests/repositories/in-memory-not
 let inMemoryNotificationRepository = new InMemoryNotificationRepository()
 let sut = new SendNotificationUseCase(inMemoryNotificationRepository)
 
-describe('Create Notifications', () => {
+describe('Send Notifications', () => {
   beforeEach(() => {
     inMemoryNotificationRepository = new InMemoryNotificationRepository()
     sut = new SendNotificationUseCase(inMemoryNotificationRepository)
